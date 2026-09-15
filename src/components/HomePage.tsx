@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import { BookOpen, MessageCircle, FileText, ArrowLeft, Star } from 'lucide-react';
+import { BookOpen, MessageCircle, FileText, ArrowLeft, Star, FileUp } from 'lucide-react';
 
 interface HomePageProps {
-  onNavigate: (page: 'home' | 'vocabulary' | 'conversations' | 'grammar') => void;
+  onNavigate: (page: 'home' | 'vocabulary' | 'conversations' | 'grammar' | 'pdf') => void;
 }
 
 export default function HomePage({ onNavigate }: HomePageProps) {
@@ -30,6 +30,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       icon: FileText,
       color: 'from-green-500 to-teal-500',
       chars: '语法',
+    },
+    {
+      id: 'pdf',
+      title: 'استخراج من PDF',
+      description: 'ارفع ملف PDF واستخرج الكلمات الصينية منه تلقائياً',
+      icon: FileUp,
+      color: 'from-amber-500 to-red-500',
+      chars: '提取',
     },
   ];
 
@@ -163,7 +171,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <span className="text-gradient">ماذا ستتعلم؟</span>
           </motion.h2>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, i) => (
               <motion.div
                 key={feature.id}

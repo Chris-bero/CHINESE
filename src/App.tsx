@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, MessageCircle, FileText, Menu, X, Sparkles } from 'lucide-react';
+import { BookOpen, MessageCircle, FileText, Menu, X, Sparkles, FileUp } from 'lucide-react';
 import VocabularyPage from './components/VocabularyPage';
 import ConversationsPage from './components/ConversationsPage';
 import GrammarPage from './components/GrammarPage';
 import HomePage from './components/HomePage';
+import PDFExtractor from './components/PDFExtractor';
 
-type Page = 'home' | 'vocabulary' | 'conversations' | 'grammar';
+type Page = 'home' | 'vocabulary' | 'conversations' | 'grammar' | 'pdf';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -17,6 +18,7 @@ function App() {
     { id: 'vocabulary' as Page, label: 'الكلمات', icon: BookOpen },
     { id: 'conversations' as Page, label: 'المحادثات', icon: MessageCircle },
     { id: 'grammar' as Page, label: 'القواعد', icon: FileText },
+    { id: 'pdf' as Page, label: 'استخراج PDF', icon: FileUp },
   ];
 
   const renderPage = () => {
@@ -25,6 +27,7 @@ function App() {
       case 'vocabulary': return <VocabularyPage />;
       case 'conversations': return <ConversationsPage />;
       case 'grammar': return <GrammarPage />;
+      case 'pdf': return <PDFExtractor />;
     }
   };
 
@@ -52,7 +55,7 @@ function App() {
                 <motion.button
                   key={item.id}
                   onClick={() => setCurrentPage(item.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                  className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
                     currentPage === item.id
                       ? 'bg-gradient-to-r from-chinese-red/20 to-chinese-gold/20 text-chinese-gold border border-chinese-gold/30'
                       : 'text-gray-300 hover:text-white hover:bg-white/5'
@@ -60,8 +63,8 @@ function App() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <item.icon size={18} />
-                  {item.label}
+                  <item.icon size={16} />
+                  <span className="hidden lg:inline">{item.label}</span>
                 </motion.button>
               ))}
             </div>
