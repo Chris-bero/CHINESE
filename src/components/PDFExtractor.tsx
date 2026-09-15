@@ -2,9 +2,11 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, FileText, Volume2, X, Sparkles, Download, Check } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
+// @ts-ignore
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
-// Configure worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+// Configure worker using local bundled worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 interface ExtractedWord {
   id: string;
